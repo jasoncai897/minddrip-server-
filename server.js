@@ -4,7 +4,12 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+
+// ✅ 设置 CORS 允许 Netlify 网页请求
+app.use(cors({
+  origin: "https://musical-khapse-fb750e.netlify.app"
+}));
+
 app.use(express.json());
 
 app.post("/chatgpt", async (req, res) => {
@@ -46,7 +51,6 @@ app.post("/chatgpt", async (req, res) => {
   }
 });
 
-// ✅ 修复：Render 动态端口支持
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`✅ 服务器已启动：http://localhost:${port}`);
