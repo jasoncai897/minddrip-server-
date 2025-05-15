@@ -14,15 +14,15 @@ app.post("/chatgpt", async (req, res) => {
   try {
     const userInput = req.body.input;
     const systemPrompt = `
-你是一个记录灵感的助手。我会输入一个想法，请你帮我：
-1. 判断这个想法属于哪个分类（只能从这6个中选一：英语学习、YouTube / 视频构想、创业构思、产品创意、写作与灵感、其他 / 未分类）
-2. 帮我写一句标题
-3. 总结整理出内容概要，适合后续归档。
+你是一个记录灵感的助手。我会输入一个想法，请你帮我判断它属于哪个分类，并总结出标题和内容。
 
-请用下面的格式返回，不要加多余内容：
+【要求格式非常严格】如下所示，必须一行一项返回：
 分类：[分类名]
-标题：[标题]
-内容：[整理后的内容概要]
+标题：[一句标题]
+内容：[一段内容摘要]
+
+分类只能是：英语学习、YouTube / 视频构想、创业构思、产品创意、写作与灵感、其他 / 未分类
+不要添加多余解释、不要换结构、不要标注我是 AI。
 `;
 
     const response = await axios.post(
@@ -45,7 +45,7 @@ app.post("/chatgpt", async (req, res) => {
     res.json(response.data);
   } catch (err) {
     console.error("❌ OpenAI 请求失败：", err?.response?.data || err.message);
-    res.status(500).json({ error: "OpenAI 请求失败" }); // ✅ 返回 JSON 格式错误
+    res.status(500).json({ error: "OpenAI 请求失败" });
   }
 });
 
