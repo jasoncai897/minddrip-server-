@@ -44,8 +44,8 @@ app.post("/chatgpt", async (req, res) => {
 
     res.json(response.data);
   } catch (err) {
-    console.error("❌ OpenAI 请求失败：", err?.response?.data || err.message);
-    res.status(500).json({ error: "OpenAI 请求失败" });
+    console.error("❌ OpenAI 请求失败详细：", err?.response?.data || err.message);
+    res.status(500).json({ error: err?.response?.data || err.message });
   }
 });
 
