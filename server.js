@@ -46,6 +46,8 @@ app.post("/chatgpt", async (req, res) => {
   }
 });
 
-app.listen(3001, () => {
-  console.log("✅ 代理服务器已启动：http://localhost:3001");
+// ✅ 修复：Render 动态端口支持
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
+  console.log(`✅ 服务器已启动：http://localhost:${port}`);
 });
