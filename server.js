@@ -5,9 +5,8 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(cors({
-  origin: "https://musical-khapse-fb750e.netlify.app"
-}));
+// ✅ 万能跨域配置（开发用）
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 app.post("/chatgpt", async (req, res) => {
