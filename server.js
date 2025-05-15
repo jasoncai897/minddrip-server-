@@ -5,11 +5,9 @@ require("dotenv").config();
 
 const app = express();
 
-// ✅ 设置 CORS 允许 Netlify 网页请求
 app.use(cors({
   origin: "https://musical-khapse-fb750e.netlify.app"
 }));
-
 app.use(express.json());
 
 app.post("/chatgpt", async (req, res) => {
@@ -47,7 +45,7 @@ app.post("/chatgpt", async (req, res) => {
     res.json(response.data);
   } catch (err) {
     console.error("❌ OpenAI 请求失败：", err?.response?.data || err.message);
-    res.status(500).send("OpenAI 请求失败");
+    res.status(500).json({ error: "OpenAI 请求失败" }); // ✅ 返回 JSON 格式错误
   }
 });
 
